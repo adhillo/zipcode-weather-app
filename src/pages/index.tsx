@@ -64,16 +64,16 @@ const Home: React.FC = () => {
   return (
     <div className="flex flex-col justify-center items-center">
       <form onSubmit={(e) => handleSubmit(e)} className="flex flex-row justify-center items-center">
-        <label htmlFor="zipCode" className=" m-1">Enter a Zip Code:</label>
+        <label htmlFor="zipCode" className=" m-1 text-4xl font-extrabold dark:text-white">Enter a Zip Code:</label>
         <input
           type="text"
           id="zipCode"
           value={zipCode}
           onChange={(e) => setZipCode(e.target.value)}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 m-5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />
         <button
-          className="  m-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
           type="submit"
         >
           Get Weather
@@ -85,9 +85,9 @@ const Home: React.FC = () => {
         <p>{error}</p>
       ) : weatherData ? (
         <div>
-          <h1>Current Zipcode: {weatherData.location}</h1>
-          <p>Temperature: {weatherData.temp} °F</p>
-          <p>Precipitation: {weatherData.precip} inches</p>
+          <h1 className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-5 mt-10">📍 Current Zipcode: {weatherData.location}</h1>
+          <p className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-5"> 🌡️ Temperature: {weatherData.temp} °F</p>
+          <p className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-5">  ⛆ Precipitation: {weatherData.precip} inches</p>
         </div>
       ) : (
         <p>No weather data available.</p>
