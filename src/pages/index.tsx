@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-
 interface ErrorData {
   error: string;
 }
@@ -19,11 +18,11 @@ const Home: React.FC = () => {
 
   const fetchWeatherData = async (
     us_zip: string
-  ): Promise<WeatherData| ErrorData> => {
+  ): Promise<WeatherData | ErrorData> => {
     try {
       const response = await fetch(`./api/weather?us_zip=${us_zip}`);
       if (!response.ok) {
-        const bad_response = await response.json()
+        const bad_response = await response.json();
         setError(bad_response.error);
         setWeatherData(undefined);
         return bad_response;
@@ -43,7 +42,7 @@ const Home: React.FC = () => {
 
     const zipFormatRegex = /^\d{5}$/;
     if (!zipFormatRegex.test(zipCode)) {
-      setError('Please enter a valid 5-digit ZIP code');
+      setError("Please enter a valid 5-digit ZIP code");
       return;
     }
     setIsLoading(true);
@@ -63,16 +62,22 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor="zipCode">Enter a Zip Code:</label>
+    <div className="flex flex-col justify-center items-center">
+      <form onSubmit={(e) => handleSubmit(e)} className="flex flex-row justify-center items-center">
+        <label htmlFor="zipCode" className=" m-1 text-4xl font-extrabold dark:text-white">Enter a Zip Code:</label>
         <input
           type="text"
           id="zipCode"
           value={zipCode}
           onChange={(e) => setZipCode(e.target.value)}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 m-5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />
-        <button type="submit">Get Weather</button>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+          type="submit"
+        >
+          Get Weather
+        </button>
       </form>
       {isLoading ? (
         <p>Loading...</p>
@@ -80,9 +85,9 @@ const Home: React.FC = () => {
         <p>{error}</p>
       ) : weatherData ? (
         <div>
-          <h1>Current Zipcode {weatherData.location}</h1>
-          <p>Temperature: {weatherData.temp} °F</p>
-          <p>Precipitation: {weatherData.precip} inches</p>
+          <h1 className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-5 mt-10">📍 Current Zipcode: {weatherData.location}</h1>
+          <p className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-5"> 🌡️ Temperature: {weatherData.temp} °F</p>
+          <p className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-5">  ⛆ Precipitation: {weatherData.precip} inches</p>
         </div>
       ) : (
         <p>No weather data available.</p>
