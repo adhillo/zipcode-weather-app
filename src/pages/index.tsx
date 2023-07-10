@@ -42,7 +42,7 @@ const Home: React.FC = () => {
 
     const zipFormatRegex = /^\d{5}$/;
     if (!zipFormatRegex.test(zipCode)) {
-      setError("Please enter a valid 5-digit ZIP code");
+      setError("Please enter a valid 5-digit ZIP CODE");
       return;
     }
     setIsLoading(true);
